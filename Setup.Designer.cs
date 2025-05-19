@@ -39,7 +39,9 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard8 = new ProgramCard();
             programCard9 = new ProgramCard();
             shuzukoPanel1 = new ShuzukoPanel();
+            label1 = new Label();
             flowLayoutPanel1.SuspendLayout();
+            shuzukoPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -192,6 +194,7 @@ namespace SCARA_ROBOT_SOFTWARE
             // 
             shuzukoPanel1.BackColor = Color.Transparent;
             shuzukoPanel1.BorderRadius = 15;
+            shuzukoPanel1.Controls.Add(label1);
             shuzukoPanel1.Dock = DockStyle.Bottom;
             shuzukoPanel1.ForeColor = Color.Black;
             shuzukoPanel1.GradientAngle = 90F;
@@ -201,6 +204,16 @@ namespace SCARA_ROBOT_SOFTWARE
             shuzukoPanel1.Name = "shuzukoPanel1";
             shuzukoPanel1.Size = new Size(1320, 200);
             shuzukoPanel1.TabIndex = 52;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label1.Location = new Point(617, 2);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Detals";
             // 
             // Setup
             // 
@@ -214,6 +227,8 @@ namespace SCARA_ROBOT_SOFTWARE
             Name = "Setup";
             Text = "ManualMode";
             flowLayoutPanel1.ResumeLayout(false);
+            shuzukoPanel1.ResumeLayout(false);
+            shuzukoPanel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -229,5 +244,6 @@ namespace SCARA_ROBOT_SOFTWARE
         private ProgramCard programCard8;
         private ProgramCard programCard9;
         private ShuzukoPanel shuzukoPanel1;
+        private Label label1;
     }
 }
