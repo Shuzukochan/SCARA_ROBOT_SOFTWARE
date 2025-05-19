@@ -211,9 +211,10 @@ namespace SCARA_ROBOT_SOFTWARE
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             label1.Location = new Point(617, 2);
             label1.Name = "label1";
-            label1.Size = new Size(85, 32);
+            label1.Size = new Size(96, 32);
             label1.TabIndex = 0;
-            label1.Text = "Detals";
+            label1.Text = "Detalss";
+            label1.Click += label1_Click;
             // 
             // Setup
             // 
