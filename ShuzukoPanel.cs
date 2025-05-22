@@ -7,93 +7,70 @@ namespace SCARA_ROBOT_SOFTWARE
 {
     public class ShuzukoPanel : Panel
     {
-        private int borderRadius = 30;
+        private int borderRadius = 5;
         private float gradientAngle = 90F;
-        private Color gradientTopColor = Color.DodgerBlue;
-        private Color gradientBottomColor = Color.DodgerBlue;
+        private Color gradientTopColor = Color.White;
+        private Color gradientBottomColor = Color.White;
+        private Color borderColor = Color.Silver;
 
         public ShuzukoPanel()
         {
-            this.BackColor = Color.White; 
-            this.ForeColor = Color.Black; 
-            this.DoubleBuffered = true;   
-            this.Resize += new EventHandler(OnResize); 
+            this.BackColor = Color.White;
+            this.ForeColor = Color.Black;
+            this.DoubleBuffered = true;
+
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer |
+                ControlStyles.ResizeRedraw |
+                ControlStyles.SupportsTransparentBackColor,
+                true
+            );
+            this.UpdateStyles();
         }
 
         public int BorderRadius
         {
             get => borderRadius;
-            set
-            {
-                borderRadius = value;
-                UpdateRegion();
-            }
+            set { borderRadius = value; Invalidate(); }
         }
 
         public float GradientAngle
         {
             get => gradientAngle;
-            set
-            {
-                gradientAngle = value;
-                this.Invalidate();
-            }
+            set { gradientAngle = value; Invalidate(); }
         }
 
         public Color GradientTopColor
         {
             get => gradientTopColor;
-            set
-            {
-                gradientTopColor = value;
-                this.Invalidate();
-            }
+            set { gradientTopColor = value; Invalidate(); }
         }
 
         public Color GradientBottomColor
         {
             get => gradientBottomColor;
-            set
-            {
-                gradientBottomColor = value;
-                this.Invalidate();
-            }
+            set { gradientBottomColor = value; Invalidate(); }
         }
 
-        private GraphicsPath GetShuzukoPath(RectangleF rectangle, float radius)
+        public Color BorderColor
         {
-            GraphicsPath graphicsPath = new GraphicsPath();
-            float curveSize = radius * 2F;
-
-            graphicsPath.StartFigure();
-            graphicsPath.AddArc(rectangle.X, rectangle.Y, curveSize, curveSize, 180, 90); // Top-left
-            graphicsPath.AddArc(rectangle.Right - curveSize, rectangle.Y, curveSize, curveSize, 270, 90); // Top-right
-            graphicsPath.AddArc(rectangle.Right - curveSize, rectangle.Bottom - curveSize, curveSize, curveSize, 0, 90); // Bottom-right
-            graphicsPath.AddArc(rectangle.X, rectangle.Bottom - curveSize, curveSize, curveSize, 90, 90); // Bottom-left
-            graphicsPath.CloseFigure();
-
-            return graphicsPath;
+            get => borderColor;
+            set { borderColor = value; Invalidate(); }
         }
 
-        private void UpdateRegion()
+        private GraphicsPath GetRoundPath(Rectangle bounds, int radius)
         {
-            if (borderRadius > 2)
-            {
-                using (GraphicsPath path = GetShuzukoPath(new RectangleF(0, 0, this.Width, this.Height), borderRadius))
-                {
-                    this.Region = new Region(path);
-                }
-            }
-            else
-            {
-                this.Region = new Region(new RectangleF(0, 0, this.Width, this.Height));
-            }
-            this.Invalidate(); 
-        }
-
-        private void OnResize(object? sender, EventArgs e)
-        {
-            UpdateRegion(); 
+            float r = radius * 2F;
+            GraphicsPath path = new GraphicsPath();
+            path.StartFigure();
+            path.AddArc(bounds.X, bounds.Y, r, r, 180, 90);
+            path.AddArc(bounds.Right - r, bounds.Y, r, r, 270, 90);
+            path.AddArc(bounds.Right - r, bounds.Bottom - r, r, r, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - r, r, r, 90, 90);
+            path.CloseFigure();
+            return path;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -101,57 +78,25 @@ namespace SCARA_ROBOT_SOFTWARE
             base.OnPaint(e);
 
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            if (gradientTopColor != Color.Transparent || gradientBottomColor != Color.Transparent)
+            Rectangle rect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
+
+            using (GraphicsPath path = GetRoundPath(rect, borderRadius))
             {
-                this.BackColor = Color.Transparent;
-                e.Graphics.Clear(this.Parent?.BackColor ?? Color.Transparent);
+                using (LinearGradientBrush brush = new LinearGradientBrush(rect, gradientTopColor, gradientBottomColor, gradientAngle))
+                    e.Graphics.FillPath(brush, path);
 
-                using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, gradientTopColor, gradientBottomColor, gradientAngle))
+                if (borderColor != Color.Transparent)
                 {
-                    e.Graphics.FillRectangle(brush, this.ClientRectangle);
-                }
-
-                if (borderRadius > 2)
-                {
-                    using (GraphicsPath path = GetShuzukoPath(ClientRectangle, borderRadius))
-                    using (Pen pen = new Pen(this.Parent?.BackColor ?? SystemColors.Control, 2))
-                    {
+                    using (Pen pen = new Pen(borderColor, 1.2f))
                         e.Graphics.DrawPath(pen, path);
-                        this.Region = new Region(path);
-                    }
                 }
-                else
-                {
-                    this.Region = new Region(ClientRectangle);
-                }
+
+                // Set region để bo góc không bị mất
+                this.Region = new Region(path);
             }
-            else
-            {
-                using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, gradientTopColor, gradientBottomColor, gradientAngle))
-                {
-                    e.Graphics.FillRectangle(brush, this.ClientRectangle);
-                }
-
-                if (borderRadius > 2)
-                {
-                    using (GraphicsPath path = GetShuzukoPath(ClientRectangle, borderRadius))
-                    using (Pen pen = new Pen(this.Parent?.BackColor ?? SystemColors.Control, 2))
-                    {
-                        e.Graphics.DrawPath(pen, path);
-                    }
-                }
-
-            }
-        }
-
-        protected override void OnParentChanged(EventArgs e)
-        {
-            base.OnParentChanged(e);
-            this.Invalidate();;
         }
     }
 }

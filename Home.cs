@@ -31,13 +31,21 @@ namespace SCARA_ROBOT_SOFTWARE
 
         private void manualButton_Click(object sender, EventArgs e)
         {
-            OpenFormInPanel(new Setup()); 
-
+            OpenFormInPanel(new ManualControl());
         }
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-            OpenFormInPanel(new Test()); 
+        }
+
+        private void setupButton_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanel(new Setup());
+        }
+
+        private void comPortButton_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanel(new ComPort());
         }
     }
 }

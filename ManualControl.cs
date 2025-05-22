@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SCARA_ROBOT_SOFTWARE
 {
-    public partial class Test: Form
+    public partial class ManualControl: Form
     {
-        public Test()
+        public ManualControl()
         {
             InitializeComponent();
         }

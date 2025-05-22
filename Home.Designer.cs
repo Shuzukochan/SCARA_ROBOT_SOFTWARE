@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             leftPanel = new Panel();
+            comPortButton = new Button();
+            setupButton = new Button();
             manualButton = new Button();
             homeButton = new Button();
             groundPanel = new Panel();
@@ -39,6 +41,8 @@
             // leftPanel
             // 
             leftPanel.BackColor = Color.FromArgb(38, 50, 56);
+            leftPanel.Controls.Add(comPortButton);
+            leftPanel.Controls.Add(setupButton);
             leftPanel.Controls.Add(manualButton);
             leftPanel.Controls.Add(homeButton);
             leftPanel.Dock = DockStyle.Left;
@@ -46,6 +50,30 @@
             leftPanel.Name = "leftPanel";
             leftPanel.Size = new Size(300, 1041);
             leftPanel.TabIndex = 0;
+            // 
+            // comPortButton
+            // 
+            comPortButton.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            comPortButton.ForeColor = Color.FromArgb(38, 50, 56);
+            comPortButton.Location = new Point(0, 449);
+            comPortButton.Name = "comPortButton";
+            comPortButton.Size = new Size(300, 92);
+            comPortButton.TabIndex = 3;
+            comPortButton.Text = "Com Port";
+            comPortButton.UseVisualStyleBackColor = true;
+            comPortButton.Click += comPortButton_Click;
+            // 
+            // setupButton
+            // 
+            setupButton.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            setupButton.ForeColor = Color.FromArgb(38, 50, 56);
+            setupButton.Location = new Point(0, 351);
+            setupButton.Name = "setupButton";
+            setupButton.Size = new Size(300, 92);
+            setupButton.TabIndex = 2;
+            setupButton.Text = "Setup Program";
+            setupButton.UseVisualStyleBackColor = true;
+            setupButton.Click += setupButton_Click;
             // 
             // manualButton
             // 
@@ -55,7 +83,7 @@
             manualButton.Name = "manualButton";
             manualButton.Size = new Size(300, 92);
             manualButton.TabIndex = 1;
-            manualButton.Text = "Manual Mode";
+            manualButton.Text = "Manual Control";
             manualButton.UseVisualStyleBackColor = true;
             manualButton.Click += manualButton_Click;
             // 
@@ -102,5 +130,7 @@
         private Button homeButton;
         private Button manualButton;
         private Panel groundPanel;
+        private Button setupButton;
+        private Button comPortButton;
     }
 }

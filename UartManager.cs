@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO.Ports;
-using System.Diagnostics;
+using System.Text;
+
 namespace SCARA_ROBOT_SOFTWARE
 {
     public class UartManager
     {
         private static readonly UartManager _instance = new();
         public static UartManager Instance => _instance;
+
         public SerialPort SerialPort { get; private set; }
 
         private UartManager()
@@ -18,11 +16,12 @@ namespace SCARA_ROBOT_SOFTWARE
             SerialPort = new SerialPort
             {
                 PortName = GlobalVariables.selectedPort,
-                BaudRate = 115200,
+                BaudRate = GlobalVariables.selectedBaudrate,
                 Parity = Parity.None,
                 DataBits = 8,
                 StopBits = StopBits.One,
-                Handshake = Handshake.None
+                Handshake = Handshake.None,
+                Encoding = Encoding.ASCII
             };
         }
 
@@ -42,30 +41,14 @@ namespace SCARA_ROBOT_SOFTWARE
             }
         }
 
-        public void Send(byte[] data)
+        public void SendCommand(string command)
         {
-            if (SerialPort.IsOpen)
+            if (SerialPort.IsOpen && !string.IsNullOrEmpty(command))
             {
-                SerialPort.Write(data, 0, data.Length);
+                SerialPort.Write(command);
             }
         }
-        
-        public byte[] ReceiveBytes()
-        {
-            if (SerialPort.IsOpen)
-            {
-                int bytesToRead = SerialPort.BytesToRead;
-                byte[] buffer = new byte[bytesToRead];
-                SerialPort.Read(buffer, 0, bytesToRead);
-                return buffer;
-            }
-            else
-            {
-                return new byte[0];
-            }
-        }
-
-        public string Receive()
+        public string ReceiveResponse()
         {
             if (SerialPort.IsOpen)
             {
@@ -73,7 +56,7 @@ namespace SCARA_ROBOT_SOFTWARE
             }
             else
             {
-                return "";
+                return string.Empty;
             }
         }
     }

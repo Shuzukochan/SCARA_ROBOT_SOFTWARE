@@ -7,6 +7,9 @@ namespace SCARA_ROBOT_SOFTWARE
 {
     public class ProgramCard : UserControl
     {
+        public int Columns { get; set; } = 0;
+        public int Rows { get; set; } = 0;
+
         private Label lblTitle;
         private Label lblLine1;
         private Label lblLine2;
@@ -104,7 +107,7 @@ namespace SCARA_ROBOT_SOFTWARE
             using (GraphicsPath path = GetRoundedRectangle(rect, 10))
             {
                 this.Region = new Region(GetRoundedRectangle(this.ClientRectangle, 10));
-                using (Pen pen = new Pen(isSelected ? Color.White : Color.FromArgb(0, 122, 255), 2))
+                using (Pen pen = new Pen(isSelected ? Color.FromArgb(0, 90, 200) : Color.FromArgb(0, 122, 255), 2))
                 {
                     e.Graphics.DrawPath(pen, path);
                 }

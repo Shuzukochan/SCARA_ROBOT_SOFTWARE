@@ -44,6 +44,7 @@ namespace SCARA_ROBOT_SOFTWARE
         public static string ProgramName1_1 = "";
 
         public static string? selectedPort = "";
+        public static int selectedBaudrate = 0;
 
         public static byte SelectProgram;
         public static byte SetupProgram;
