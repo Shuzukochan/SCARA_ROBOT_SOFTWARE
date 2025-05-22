@@ -64,6 +64,8 @@ namespace SCARA_ROBOT_SOFTWARE
             rackXTextBox = new TextBox();
             setupProgramText = new Label();
             showLocationPanel = new ShuzukoPanel();
+            columnLabel = new Label();
+            rowsLabel = new Label();
             flowLayoutPanel1.SuspendLayout();
             shuzukoPanel1.SuspendLayout();
             shuzukoPanel2.SuspendLayout();
@@ -75,7 +77,7 @@ namespace SCARA_ROBOT_SOFTWARE
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.BackColor = Color.White;
+            flowLayoutPanel1.BackColor = Color.Transparent;
             flowLayoutPanel1.Controls.Add(programCard1);
             flowLayoutPanel1.Controls.Add(programCard2);
             flowLayoutPanel1.Controls.Add(programCard3);
@@ -95,7 +97,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard1
             // 
             programCard1.BackColor = Color.White;
-            programCard1.Columns = 0;
             programCard1.ForeColor = Color.Black;
             programCard1.Line1 = "Test 1";
             programCard1.Line2 = "Test 2";
@@ -103,7 +104,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard1.Margin = new Padding(2, 2, 2, 0);
             programCard1.Name = "programCard1";
             programCard1.Padding = new Padding(12);
-            programCard1.Rows = 0;
             programCard1.Size = new Size(296, 110);
             programCard1.TabIndex = 0;
             programCard1.Title = "Program 1";
@@ -111,7 +111,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard2
             // 
             programCard2.BackColor = Color.White;
-            programCard2.Columns = 0;
             programCard2.ForeColor = Color.Black;
             programCard2.Line1 = "Test 1";
             programCard2.Line2 = "Test 2";
@@ -119,7 +118,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard2.Margin = new Padding(2, 2, 2, 0);
             programCard2.Name = "programCard2";
             programCard2.Padding = new Padding(12);
-            programCard2.Rows = 0;
             programCard2.Size = new Size(296, 110);
             programCard2.TabIndex = 1;
             programCard2.Title = "Program 2";
@@ -127,7 +125,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard3
             // 
             programCard3.BackColor = Color.White;
-            programCard3.Columns = 0;
             programCard3.ForeColor = Color.Black;
             programCard3.Line1 = "Test 1";
             programCard3.Line2 = "Test 2";
@@ -135,7 +132,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard3.Margin = new Padding(2, 2, 0, 0);
             programCard3.Name = "programCard3";
             programCard3.Padding = new Padding(12);
-            programCard3.Rows = 0;
             programCard3.Size = new Size(296, 110);
             programCard3.TabIndex = 2;
             programCard3.Title = "Program 3";
@@ -143,7 +139,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard4
             // 
             programCard4.BackColor = Color.White;
-            programCard4.Columns = 0;
             programCard4.ForeColor = Color.Black;
             programCard4.Line1 = "Test 1";
             programCard4.Line2 = "Test 2";
@@ -151,7 +146,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard4.Margin = new Padding(2, 2, 2, 0);
             programCard4.Name = "programCard4";
             programCard4.Padding = new Padding(12);
-            programCard4.Rows = 0;
             programCard4.Size = new Size(296, 110);
             programCard4.TabIndex = 3;
             programCard4.Title = "Program 4";
@@ -159,7 +153,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard5
             // 
             programCard5.BackColor = Color.White;
-            programCard5.Columns = 0;
             programCard5.ForeColor = Color.Black;
             programCard5.Line1 = "Test 1";
             programCard5.Line2 = "Test 2";
@@ -167,7 +160,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard5.Margin = new Padding(2, 2, 2, 0);
             programCard5.Name = "programCard5";
             programCard5.Padding = new Padding(12);
-            programCard5.Rows = 0;
             programCard5.Size = new Size(296, 110);
             programCard5.TabIndex = 4;
             programCard5.Title = "Program 5";
@@ -175,7 +167,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard6
             // 
             programCard6.BackColor = Color.White;
-            programCard6.Columns = 0;
             programCard6.ForeColor = Color.Black;
             programCard6.Line1 = "Test 1";
             programCard6.Line2 = "Test 2";
@@ -183,7 +174,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard6.Margin = new Padding(2, 2, 2, 0);
             programCard6.Name = "programCard6";
             programCard6.Padding = new Padding(12);
-            programCard6.Rows = 0;
             programCard6.Size = new Size(296, 110);
             programCard6.TabIndex = 5;
             programCard6.Title = "Program 6";
@@ -191,7 +181,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard7
             // 
             programCard7.BackColor = Color.White;
-            programCard7.Columns = 0;
             programCard7.ForeColor = Color.Black;
             programCard7.Line1 = "Test 1";
             programCard7.Line2 = "Test 2";
@@ -199,7 +188,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard7.Margin = new Padding(2, 2, 2, 0);
             programCard7.Name = "programCard7";
             programCard7.Padding = new Padding(12);
-            programCard7.Rows = 0;
             programCard7.Size = new Size(296, 110);
             programCard7.TabIndex = 6;
             programCard7.Title = "Program 7";
@@ -207,7 +195,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard8
             // 
             programCard8.BackColor = Color.White;
-            programCard8.Columns = 0;
             programCard8.ForeColor = Color.Black;
             programCard8.Line1 = "Test 1";
             programCard8.Line2 = "Test 2";
@@ -215,7 +202,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard8.Margin = new Padding(2, 2, 2, 0);
             programCard8.Name = "programCard8";
             programCard8.Padding = new Padding(12);
-            programCard8.Rows = 0;
             programCard8.Size = new Size(296, 109);
             programCard8.TabIndex = 7;
             programCard8.Title = "Program 8";
@@ -223,7 +209,6 @@ namespace SCARA_ROBOT_SOFTWARE
             // programCard9
             // 
             programCard9.BackColor = Color.White;
-            programCard9.Columns = 0;
             programCard9.ForeColor = Color.Black;
             programCard9.Line1 = "Test 1";
             programCard9.Line2 = "Test 2";
@@ -231,7 +216,6 @@ namespace SCARA_ROBOT_SOFTWARE
             programCard9.Margin = new Padding(2, 2, 2, 0);
             programCard9.Name = "programCard9";
             programCard9.Padding = new Padding(12);
-            programCard9.Rows = 0;
             programCard9.Size = new Size(296, 110);
             programCard9.TabIndex = 8;
             programCard9.Title = "Program 9";
@@ -241,6 +225,8 @@ namespace SCARA_ROBOT_SOFTWARE
             shuzukoPanel1.BackColor = Color.Transparent;
             shuzukoPanel1.BorderColor = Color.Transparent;
             shuzukoPanel1.BorderRadius = 15;
+            shuzukoPanel1.Controls.Add(rowsLabel);
+            shuzukoPanel1.Controls.Add(columnLabel);
             shuzukoPanel1.Controls.Add(label5);
             shuzukoPanel1.Controls.Add(label4);
             shuzukoPanel1.Controls.Add(label3);
@@ -300,7 +286,7 @@ namespace SCARA_ROBOT_SOFTWARE
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15F);
-            label2.Location = new Point(167, 30);
+            label2.Location = new Point(165, 30);
             label2.Name = "label2";
             label2.Size = new Size(88, 28);
             label2.TabIndex = 1;
@@ -547,6 +533,26 @@ namespace SCARA_ROBOT_SOFTWARE
             showLocationPanel.Size = new Size(932, 779);
             showLocationPanel.TabIndex = 54;
             // 
+            // columnLabel
+            // 
+            columnLabel.AutoSize = true;
+            columnLabel.Font = new Font("Segoe UI", 15F);
+            columnLabel.Location = new Point(639, 30);
+            columnLabel.Name = "columnLabel";
+            columnLabel.Size = new Size(23, 28);
+            columnLabel.TabIndex = 6;
+            columnLabel.Text = "0";
+            // 
+            // rowsLabel
+            // 
+            rowsLabel.AutoSize = true;
+            rowsLabel.Font = new Font("Segoe UI", 15F);
+            rowsLabel.Location = new Point(1051, 30);
+            rowsLabel.Name = "rowsLabel";
+            rowsLabel.Size = new Size(23, 28);
+            rowsLabel.TabIndex = 7;
+            rowsLabel.Text = "0";
+            // 
             // Setup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -614,5 +620,7 @@ namespace SCARA_ROBOT_SOFTWARE
         private ShuzukoPanel shuzukoPanel6;
         private TextBox textBox2;
         private Label label12;
+        private Label rowsLabel;
+        private Label columnLabel;
     }
 }

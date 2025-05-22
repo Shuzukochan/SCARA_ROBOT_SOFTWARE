@@ -7,8 +7,7 @@ namespace SCARA_ROBOT_SOFTWARE
 {
     public class ProgramCard : UserControl
     {
-        public int Columns { get; set; } = 0;
-        public int Rows { get; set; } = 0;
+
 
         private Label lblTitle;
         private Label lblLine1;

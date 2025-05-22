@@ -10,6 +10,7 @@ namespace SCARA_ROBOT_SOFTWARE
     {
         private List<ProgramCard> allCards = new List<ProgramCard>();
         private ProgramCard selectedCard;
+        private int selectedIndex = 0;
 
         public Setup()
         {
@@ -18,6 +19,21 @@ namespace SCARA_ROBOT_SOFTWARE
 
         private void Setup_Load(object sender, EventArgs e)
         {
+            // Đảm bảo có đủ 9 chương trình trước khi gán dữ liệu
+            if (GlobalVariables.Programs.Count < 9)
+            {
+                GlobalVariables.Programs.Clear();
+                for (int i = 0; i < 9; i++)
+                {
+                    GlobalVariables.Programs.Add(new GlobalVariables.ProgramData
+                    {
+                        Title = $"Program {i + 1}",
+                        Columns = 0,
+                        Rows = 0
+                    });
+                }
+            }
+
             allCards = flowLayoutPanel1.Controls.OfType<ProgramCard>().ToList();
 
             foreach (var card in allCards)
@@ -27,20 +43,15 @@ namespace SCARA_ROBOT_SOFTWARE
                     ctrl.Click += ProgramCard_Click;
             }
 
-            var defaultCard = allCards[0];
+            selectedIndex = 0;
+            selectedCard = allCards[selectedIndex];
+
             foreach (var card in allCards)
-                card.SetSelected(card == defaultCard);
+                card.SetSelected(card == selectedCard);
 
-            selectedCard = defaultCard;
-            label2.Text = defaultCard.Title;
-            setupProgramText.Text = "Setup " + defaultCard.Title;
-
-            rackXTextBox.Text = selectedCard.Columns.ToString();
-            rackYTextBox.Text = selectedCard.Rows.ToString();
-
-            if (selectedCard.Columns > 0 && selectedCard.Rows > 0)
-                GenerateLocationButtons(selectedCard.Columns, selectedCard.Rows);
+            LoadProgramData(selectedIndex);
         }
+
 
         private void ProgramCard_Click(object sender, EventArgs e)
         {
@@ -53,22 +64,32 @@ namespace SCARA_ROBOT_SOFTWARE
 
             if (clickedCard != null)
             {
-                foreach (var card in allCards)
-                    card.SetSelected(card == clickedCard);
-
+                selectedIndex = allCards.IndexOf(clickedCard);
                 selectedCard = clickedCard;
 
-                label2.Text = clickedCard.Title;
-                setupProgramText.Text = "Setup " + clickedCard.Title;
+                foreach (var card in allCards)
+                    card.SetSelected(card == selectedCard);
 
-                rackXTextBox.Text = clickedCard.Columns.ToString();
-                rackYTextBox.Text = clickedCard.Rows.ToString();
-
-                if (clickedCard.Columns > 0 && clickedCard.Rows > 0)
-                    GenerateLocationButtons(clickedCard.Columns, clickedCard.Rows);
-                else
-                    showLocationPanel.Controls.Clear();
+                LoadProgramData(selectedIndex);
             }
+        }
+
+        private void LoadProgramData(int index)
+        {
+            var program = GlobalVariables.Programs[index];
+
+            label2.Text = program.Title;
+            setupProgramText.Text = "Setup " + program.Title;
+            columnLabel.Text = program.Columns.ToString();
+            rowsLabel.Text = program.Rows.ToString();
+
+            rackXTextBox.Text = program.Columns.ToString();
+            rackYTextBox.Text = program.Rows.ToString();
+
+            if (program.Columns > 0 && program.Rows > 0)
+                GenerateLocationButtons(program.Columns, program.Rows);
+            else
+                showLocationPanel.Controls.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,14 +101,12 @@ namespace SCARA_ROBOT_SOFTWARE
                 return;
             }
 
-            if (selectedCard == null)
-            {
-                MessageBox.Show("Vui lòng chọn một Program.");
-                return;
-            }
+            var program = GlobalVariables.Programs[selectedIndex];
+            program.Columns = cols;
+            program.Rows = rows;
 
-            selectedCard.Columns = cols;
-            selectedCard.Rows = rows;
+            columnLabel.Text = cols.ToString();
+            rowsLabel.Text = rows.ToString();
 
             GenerateLocationButtons(cols, rows);
         }

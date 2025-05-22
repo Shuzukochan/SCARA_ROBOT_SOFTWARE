@@ -10,6 +10,7 @@ namespace SCARA_ROBOT_SOFTWARE
         public Home()
         {
             InitializeComponent();
+            OpenFormInPanel(new ComPort());
         }
 
         public void OpenFormInPanel(Form childForm)
@@ -33,11 +34,6 @@ namespace SCARA_ROBOT_SOFTWARE
         {
             OpenFormInPanel(new ManualControl());
         }
-
-        private void homeButton_Click(object sender, EventArgs e)
-        {
-        }
-
         private void setupButton_Click(object sender, EventArgs e)
         {
             OpenFormInPanel(new Setup());

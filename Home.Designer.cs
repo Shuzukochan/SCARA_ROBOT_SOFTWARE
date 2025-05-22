@@ -33,7 +33,6 @@
             comPortButton = new Button();
             setupButton = new Button();
             manualButton = new Button();
-            homeButton = new Button();
             groundPanel = new Panel();
             leftPanel.SuspendLayout();
             SuspendLayout();
@@ -44,7 +43,6 @@
             leftPanel.Controls.Add(comPortButton);
             leftPanel.Controls.Add(setupButton);
             leftPanel.Controls.Add(manualButton);
-            leftPanel.Controls.Add(homeButton);
             leftPanel.Dock = DockStyle.Left;
             leftPanel.Location = new Point(0, 0);
             leftPanel.Name = "leftPanel";
@@ -55,7 +53,7 @@
             // 
             comPortButton.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             comPortButton.ForeColor = Color.FromArgb(38, 50, 56);
-            comPortButton.Location = new Point(0, 449);
+            comPortButton.Location = new Point(0, 155);
             comPortButton.Name = "comPortButton";
             comPortButton.Size = new Size(300, 92);
             comPortButton.TabIndex = 3;
@@ -87,19 +85,6 @@
             manualButton.UseVisualStyleBackColor = true;
             manualButton.Click += manualButton_Click;
             // 
-            // homeButton
-            // 
-            homeButton.BackColor = Color.FromArgb(236, 239, 241);
-            homeButton.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            homeButton.ForeColor = Color.FromArgb(38, 50, 56);
-            homeButton.Location = new Point(0, 155);
-            homeButton.Name = "homeButton";
-            homeButton.Size = new Size(300, 92);
-            homeButton.TabIndex = 0;
-            homeButton.Text = "Home";
-            homeButton.UseVisualStyleBackColor = false;
-            homeButton.Click += homeButton_Click;
-            // 
             // groundPanel
             // 
             groundPanel.BackColor = Color.WhiteSmoke;
@@ -127,7 +112,6 @@
         #endregion
 
         private Panel leftPanel;
-        private Button homeButton;
         private Button manualButton;
         private Panel groundPanel;
         private Button setupButton;
