@@ -102,7 +102,7 @@
             // 
             btnZUp.BackColor = Color.FromArgb(125, 165, 255);
             btnZUp.FlatStyle = FlatStyle.Flat;
-            btnZUp.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnZUp.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnZUp.ForeColor = Color.White;
             btnZUp.Location = new Point(176, 50);
             btnZUp.Name = "btnZUp";
@@ -117,13 +117,13 @@
             // 
             btnXLeft.BackColor = Color.FromArgb(125, 165, 255);
             btnXLeft.FlatStyle = FlatStyle.Flat;
-            btnXLeft.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnXLeft.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnXLeft.ForeColor = Color.White;
             btnXLeft.Location = new Point(86, 160);
             btnXLeft.Name = "btnXLeft";
             btnXLeft.Size = new Size(90, 90);
             btnXLeft.TabIndex = 2;
-            btnXLeft.Text = "←";
+            btnXLeft.Text = "↻";
             btnXLeft.UseVisualStyleBackColor = false;
             btnXLeft.MouseDown += btnXLeft_MouseDown;
             btnXLeft.MouseUp += btnXLeft_MouseUp;
@@ -132,13 +132,13 @@
             // 
             btnXRight.BackColor = Color.FromArgb(125, 165, 255);
             btnXRight.FlatStyle = FlatStyle.Flat;
-            btnXRight.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnXRight.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnXRight.ForeColor = Color.White;
             btnXRight.Location = new Point(266, 160);
             btnXRight.Name = "btnXRight";
             btnXRight.Size = new Size(90, 90);
             btnXRight.TabIndex = 3;
-            btnXRight.Text = "→";
+            btnXRight.Text = "↺";
             btnXRight.UseVisualStyleBackColor = false;
             btnXRight.MouseDown += btnXRight_MouseDown;
             btnXRight.MouseUp += btnXRight_MouseUp;
@@ -147,7 +147,7 @@
             // 
             btnZDown.BackColor = Color.FromArgb(125, 165, 255);
             btnZDown.FlatStyle = FlatStyle.Flat;
-            btnZDown.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnZDown.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnZDown.ForeColor = Color.White;
             btnZDown.Location = new Point(176, 270);
             btnZDown.Name = "btnZDown";
@@ -184,7 +184,7 @@
             // 
             btnYUp.BackColor = Color.FromArgb(125, 165, 255);
             btnYUp.FlatStyle = FlatStyle.Flat;
-            btnYUp.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnYUp.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnYUp.ForeColor = Color.White;
             btnYUp.Location = new Point(176, 110);
             btnYUp.Name = "btnYUp";
@@ -199,7 +199,7 @@
             // 
             btnYDown.BackColor = Color.FromArgb(125, 165, 255);
             btnYDown.FlatStyle = FlatStyle.Flat;
-            btnYDown.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnYDown.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnYDown.ForeColor = Color.White;
             btnYDown.Location = new Point(176, 220);
             btnYDown.Name = "btnYDown";
@@ -236,27 +236,31 @@
             // 
             btnTighten.BackColor = Color.FromArgb(125, 165, 255);
             btnTighten.FlatStyle = FlatStyle.Flat;
-            btnTighten.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnTighten.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnTighten.ForeColor = Color.White;
             btnTighten.Location = new Point(91, 162);
             btnTighten.Name = "btnTighten";
             btnTighten.Size = new Size(90, 90);
             btnTighten.TabIndex = 1;
-            btnTighten.Text = "Tighten ↻";
+            btnTighten.Text = "↻";
             btnTighten.UseVisualStyleBackColor = false;
+            btnTighten.MouseDown += btnBLeft_MouseDown;
+            btnTighten.MouseUp += btnBLeft_MouseUp;
             // 
             // btnLoosen
             // 
             btnLoosen.BackColor = Color.FromArgb(125, 165, 255);
             btnLoosen.FlatStyle = FlatStyle.Flat;
-            btnLoosen.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnLoosen.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
             btnLoosen.ForeColor = Color.White;
             btnLoosen.Location = new Point(261, 162);
             btnLoosen.Name = "btnLoosen";
             btnLoosen.Size = new Size(90, 90);
             btnLoosen.TabIndex = 2;
-            btnLoosen.Text = "Loosen ↺";
+            btnLoosen.Text = "↺";
             btnLoosen.UseVisualStyleBackColor = false;
+            btnLoosen.MouseDown += btnBRight_MouseDown;
+            btnLoosen.MouseUp += btnBRight_MouseUp;
             // 
             // btnSetHome
             // 
