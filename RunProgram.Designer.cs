@@ -1,6 +1,6 @@
-namespace SCARA_ROBOT_SOFTWARE
+﻿namespace SCARA_ROBOT_SOFTWARE
 {
-    partial class Setup
+    partial class RunProgram
     {
         /// <summary>
         /// Required designer variable.
@@ -48,16 +48,10 @@ namespace SCARA_ROBOT_SOFTWARE
             label2 = new Label();
             label1 = new Label();
             shuzukoPanel2 = new ShuzukoPanel();
-            shuzukoPanel6 = new ShuzukoPanel();
-            textBox2 = new TextBox();
-            label12 = new Label();
-            shuzukoPanel5 = new ShuzukoPanel();
-            label11 = new Label();
-            textBox1 = new TextBox();
-            label10 = new Label();
+            stopButton = new Button();
             label9 = new Label();
             label8 = new Label();
-            saveButton = new Button();
+            runButton = new Button();
             shuzukoPanel4 = new ShuzukoPanel();
             label7 = new Label();
             rackYTextBox = new TextBox();
@@ -70,8 +64,6 @@ namespace SCARA_ROBOT_SOFTWARE
             flowLayoutPanel1.SuspendLayout();
             shuzukoPanel1.SuspendLayout();
             shuzukoPanel2.SuspendLayout();
-            shuzukoPanel6.SuspendLayout();
-            shuzukoPanel5.SuspendLayout();
             shuzukoPanel4.SuspendLayout();
             shuzukoPanel3.SuspendLayout();
             SuspendLayout();
@@ -242,7 +234,6 @@ namespace SCARA_ROBOT_SOFTWARE
             shuzukoPanel1.Name = "shuzukoPanel1";
             shuzukoPanel1.Size = new Size(1290, 185);
             shuzukoPanel1.TabIndex = 52;
-            shuzukoPanel1.Paint += shuzukoPanel1_Paint;
             // 
             // rowsLabel
             // 
@@ -329,13 +320,10 @@ namespace SCARA_ROBOT_SOFTWARE
             shuzukoPanel2.BackColor = Color.White;
             shuzukoPanel2.BorderColor = Color.Transparent;
             shuzukoPanel2.BorderRadius = 15;
-            shuzukoPanel2.Controls.Add(shuzukoPanel6);
-            shuzukoPanel2.Controls.Add(label12);
-            shuzukoPanel2.Controls.Add(shuzukoPanel5);
-            shuzukoPanel2.Controls.Add(label10);
+            shuzukoPanel2.Controls.Add(stopButton);
             shuzukoPanel2.Controls.Add(label9);
             shuzukoPanel2.Controls.Add(label8);
-            shuzukoPanel2.Controls.Add(saveButton);
+            shuzukoPanel2.Controls.Add(runButton);
             shuzukoPanel2.Controls.Add(shuzukoPanel4);
             shuzukoPanel2.Controls.Add(shuzukoPanel3);
             shuzukoPanel2.Controls.Add(setupProgramText);
@@ -348,86 +336,17 @@ namespace SCARA_ROBOT_SOFTWARE
             shuzukoPanel2.Size = new Size(343, 779);
             shuzukoPanel2.TabIndex = 53;
             // 
-            // shuzukoPanel6
+            // stopButton
             // 
-            shuzukoPanel6.BackColor = Color.White;
-            shuzukoPanel6.BorderColor = Color.Silver;
-            shuzukoPanel6.BorderRadius = 5;
-            shuzukoPanel6.Controls.Add(textBox2);
-            shuzukoPanel6.ForeColor = Color.Black;
-            shuzukoPanel6.GradientAngle = 90F;
-            shuzukoPanel6.GradientBottomColor = Color.White;
-            shuzukoPanel6.GradientTopColor = Color.White;
-            shuzukoPanel6.Location = new Point(15, 310);
-            shuzukoPanel6.Name = "shuzukoPanel6";
-            shuzukoPanel6.Size = new Size(313, 42);
-            shuzukoPanel6.TabIndex = 17;
-            // 
-            // textBox2
-            // 
-            textBox2.BackColor = Color.White;
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Font = new Font("Segoe UI", 13F);
-            textBox2.Location = new Point(14, 7);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(237, 24);
-            textBox2.TabIndex = 7;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            label12.Location = new Point(15, 280);
-            label12.Name = "label12";
-            label12.Size = new Size(83, 25);
-            label12.TabIndex = 16;
-            label12.Text = "Tube ID:";
-            // 
-            // shuzukoPanel5
-            // 
-            shuzukoPanel5.BackColor = Color.White;
-            shuzukoPanel5.BorderColor = Color.Silver;
-            shuzukoPanel5.BorderRadius = 5;
-            shuzukoPanel5.Controls.Add(label11);
-            shuzukoPanel5.Controls.Add(textBox1);
-            shuzukoPanel5.ForeColor = Color.Black;
-            shuzukoPanel5.GradientAngle = 90F;
-            shuzukoPanel5.GradientBottomColor = Color.White;
-            shuzukoPanel5.GradientTopColor = Color.White;
-            shuzukoPanel5.Location = new Point(15, 235);
-            shuzukoPanel5.Name = "shuzukoPanel5";
-            shuzukoPanel5.Size = new Size(313, 42);
-            shuzukoPanel5.TabIndex = 15;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 10F);
-            label11.Location = new Point(246, 9);
-            label11.Name = "label11";
-            label11.Size = new Size(61, 19);
-            label11.TabIndex = 8;
-            label11.Text = "mm/min";
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.White;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Segoe UI", 13F);
-            textBox1.Location = new Point(14, 7);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(237, 24);
-            textBox1.TabIndex = 7;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            label10.Location = new Point(15, 205);
-            label10.Name = "label10";
-            label10.Size = new Size(97, 25);
-            label10.TabIndex = 14;
-            label10.Text = "XY Speed:";
+            stopButton.BackgroundImageLayout = ImageLayout.None;
+            stopButton.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            stopButton.Location = new Point(83, 360);
+            stopButton.Name = "stopButton";
+            stopButton.Size = new Size(177, 58);
+            stopButton.TabIndex = 14;
+            stopButton.Text = "Stop";
+            stopButton.UseVisualStyleBackColor = true;
+            stopButton.Click += stopButton_Click;
             // 
             // label9
             // 
@@ -435,9 +354,9 @@ namespace SCARA_ROBOT_SOFTWARE
             label9.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             label9.Location = new Point(15, 130);
             label9.Name = "label9";
-            label9.Size = new Size(74, 25);
+            label9.Size = new Size(162, 25);
             label9.TabIndex = 13;
-            label9.Text = "Rack Y:";
+            label9.Text = "Time Delay Cycle:";
             // 
             // label8
             // 
@@ -445,20 +364,21 @@ namespace SCARA_ROBOT_SOFTWARE
             label8.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             label8.Location = new Point(15, 55);
             label8.Name = "label8";
-            label8.Size = new Size(75, 25);
+            label8.Size = new Size(70, 25);
             label8.TabIndex = 12;
-            label8.Text = "Rack X:";
+            label8.Text = "Cycles:";
             // 
-            // saveButton
+            // runButton
             // 
-            saveButton.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            saveButton.Location = new Point(81, 671);
-            saveButton.Name = "saveButton";
-            saveButton.Size = new Size(177, 58);
-            saveButton.TabIndex = 11;
-            saveButton.Text = "Save";
-            saveButton.UseVisualStyleBackColor = true;
-            saveButton.Click += saveButton_Click;
+            runButton.BackgroundImageLayout = ImageLayout.None;
+            runButton.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            runButton.Location = new Point(81, 280);
+            runButton.Name = "runButton";
+            runButton.Size = new Size(177, 58);
+            runButton.TabIndex = 11;
+            runButton.Text = "Run";
+            runButton.UseVisualStyleBackColor = true;
+            runButton.Click += runButton_Click;
             // 
             // shuzukoPanel4
             // 
@@ -480,11 +400,11 @@ namespace SCARA_ROBOT_SOFTWARE
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F);
-            label7.Location = new Point(265, 9);
+            label7.Location = new Point(272, 9);
             label7.Name = "label7";
-            label7.Size = new Size(38, 19);
+            label7.Size = new Size(15, 19);
             label7.TabIndex = 8;
-            label7.Text = "rows";
+            label7.Text = "s";
             // 
             // rackYTextBox
             // 
@@ -518,9 +438,9 @@ namespace SCARA_ROBOT_SOFTWARE
             label6.Font = new Font("Segoe UI", 10F);
             label6.Location = new Point(253, 9);
             label6.Name = "label6";
-            label6.Size = new Size(54, 19);
+            label6.Size = new Size(42, 19);
             label6.TabIndex = 8;
-            label6.Text = "column";
+            label6.Text = "times";
             // 
             // rackXTextBox
             // 
@@ -570,7 +490,7 @@ namespace SCARA_ROBOT_SOFTWARE
             showLocationPanelEnd.Size = new Size(932, 382);
             showLocationPanelEnd.TabIndex = 55;
             // 
-            // Setup
+            // RunProgram
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -582,18 +502,14 @@ namespace SCARA_ROBOT_SOFTWARE
             Controls.Add(shuzukoPanel1);
             Controls.Add(flowLayoutPanel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Setup";
+            Name = "RunProgram";
             Text = "ManualMode";
-            Load += Setup_Load;
+            Load += RunProgram_Load;
             flowLayoutPanel1.ResumeLayout(false);
             shuzukoPanel1.ResumeLayout(false);
             shuzukoPanel1.PerformLayout();
             shuzukoPanel2.ResumeLayout(false);
             shuzukoPanel2.PerformLayout();
-            shuzukoPanel6.ResumeLayout(false);
-            shuzukoPanel6.PerformLayout();
-            shuzukoPanel5.ResumeLayout(false);
-            shuzukoPanel5.PerformLayout();
             shuzukoPanel4.ResumeLayout(false);
             shuzukoPanel4.PerformLayout();
             shuzukoPanel3.ResumeLayout(false);
@@ -628,18 +544,12 @@ namespace SCARA_ROBOT_SOFTWARE
         private Label label7;
         private TextBox rackYTextBox;
         private ShuzukoPanel showLocationPanel;
-        private Button saveButton;
         private Label label9;
         private Label label8;
-        private Label label10;
-        private ShuzukoPanel shuzukoPanel5;
-        private Label label11;
-        private TextBox textBox1;
-        private ShuzukoPanel shuzukoPanel6;
-        private TextBox textBox2;
-        private Label label12;
         private Label rowsLabel;
         private Label columnLabel;
+        private Button runButton;
+        private Button stopButton;
         private ShuzukoPanel showLocationPanelEnd;
     }
 }

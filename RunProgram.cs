@@ -2,39 +2,39 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SCARA_ROBOT_SOFTWARE
 {
-    public partial class Setup : Form
+    public partial class RunProgram : Form
     {
         private List<ProgramCard> allCards = new List<ProgramCard>();
         private ProgramCard selectedCard;
         private int selectedIndex = 0;
 
-        public Setup()
+        private List<Button> runButtons = new List<Button>();
+        private int currentRunIndex = 0;
+        private bool isRunning = false;
+        private bool isPaused = false;
+
+        public RunProgram()
         {
             InitializeComponent();
         }
 
-        private void Setup_Load(object sender, EventArgs e)
+        private void RunProgram_Load(object sender, EventArgs e)
         {
             if (GlobalVariables.Programs.Count < 9)
             {
                 GlobalVariables.Programs.Clear();
-
-                Random rand = new Random();
-
                 for (int i = 0; i < 9; i++)
                 {
                     GlobalVariables.Programs.Add(new GlobalVariables.ProgramData
                     {
                         Title = $"Program {i + 1}",
-                        //Columns = 0,
-                        //Rows = 0
-                        Columns = rand.Next(1, 4), 
-                        Rows = rand.Next(1, 2)
+                        Columns = 0,
+                        Rows = 0
                     });
                 }
             }
@@ -56,7 +56,6 @@ namespace SCARA_ROBOT_SOFTWARE
 
             LoadProgramData(selectedIndex);
         }
-
 
         private void ProgramCard_Click(object sender, EventArgs e)
         {
@@ -84,36 +83,14 @@ namespace SCARA_ROBOT_SOFTWARE
             var program = GlobalVariables.Programs[index];
 
             label2.Text = program.Title;
-            setupProgramText.Text = "Setup " + program.Title;
+            setupProgramText.Text = "Run " + program.Title;
             columnLabel.Text = program.Columns.ToString();
             rowsLabel.Text = program.Rows.ToString();
-
-            rackXTextBox.Text = program.Columns.ToString();
-            rackYTextBox.Text = program.Rows.ToString();
 
             if (program.Columns > 0 && program.Rows > 0)
                 GenerateLocationButtons(program.Columns, program.Rows);
             else
                 showLocationPanel.Controls.Clear();
-        }
-
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            if (!int.TryParse(rackXTextBox.Text, out int cols) || cols <= 0 ||
-                !int.TryParse(rackYTextBox.Text, out int rows) || rows <= 0)
-            {
-                MessageBox.Show("Vui lòng nhập số nguyên dương cho cả Rack X và Y.");
-                return;
-            }
-
-            var program = GlobalVariables.Programs[selectedIndex];
-            program.Columns = cols;
-            program.Rows = rows;
-
-            columnLabel.Text = cols.ToString();
-            rowsLabel.Text = rows.ToString();
-
-            GenerateLocationButtons(cols, rows);
         }
 
         private void GenerateLocationButtons(int cols, int rows)
@@ -152,7 +129,6 @@ namespace SCARA_ROBOT_SOFTWARE
                         Text = ""
                     };
                     btn1.FlatAppearance.BorderSize = 0;
-                    btn1.Click += LocationButton_Click;
                     showLocationPanel.Controls.Add(btn1);
 
                     Button btn2 = new Button
@@ -166,26 +142,67 @@ namespace SCARA_ROBOT_SOFTWARE
                         Text = ""
                     };
                     btn2.FlatAppearance.BorderSize = 0;
-                    btn2.Click += LocationButton_Click;
                     showLocationPanelEnd.Controls.Add(btn2);
                 }
             }
         }
 
-
-
-
-        private void LocationButton_Click(object sender, EventArgs e)
+        private async void runButton_Click(object sender, EventArgs e)
         {
-            if (sender is System.Windows.Forms.Button btn && btn.Tag is Point p)
+            if (isRunning && isPaused)
             {
-                MessageBox.Show($"Bạn đã click vị trí: {p.X + 1}, {p.Y + 1}");
+                isPaused = false;
+                await ContinueRunning();
+                return;
+            }
+
+            runButtons = showLocationPanel.Controls.OfType<Button>()
+                .OrderBy(btn => ((Point)btn.Tag).Y)
+                .ThenBy(btn => ((Point)btn.Tag).X)
+                .ToList();
+
+            isRunning = true;
+            isPaused = false;
+
+            await ContinueRunning();
+        }
+
+        private async Task ContinueRunning()
+        {
+            var startButtons = showLocationPanel.Controls.OfType<Button>()
+                .OrderBy(btn => ((Point)btn.Tag).Y)
+                .ThenBy(btn => ((Point)btn.Tag).X)
+                .ToList();
+
+            var endButtons = showLocationPanelEnd.Controls.OfType<Button>()
+                .OrderBy(btn => ((Point)btn.Tag).Y)
+                .ThenBy(btn => ((Point)btn.Tag).X)
+                .ToList();
+
+            while (isRunning && !isPaused && currentRunIndex < startButtons.Count)
+            {
+                var btnStart = startButtons[currentRunIndex];
+                var btnEnd = endButtons[currentRunIndex];
+
+                btnStart.BackColor = Color.Red;
+
+                await Task.Delay(2500);
+                btnEnd.BackColor = Color.Lime;
+
+                await Task.Delay(2500);
+
+                currentRunIndex++;
             }
         }
 
-        private void shuzukoPanel1_Paint(object sender, PaintEventArgs e)
-        {
 
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            if (isRunning)
+            {
+                isPaused = true;
+            }
         }
     }
 }

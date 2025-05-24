@@ -30,33 +30,35 @@
         {
             lblStepSize = new Label();
             cbStepSize = new ComboBox();
-            container = new FlowLayoutPanel();
             xyPanel = new Panel();
             lblXY = new Label();
-            btnUp = new Button();
-            btnLeft = new Button();
-            btnRight = new Button();
-            btnDown = new Button();
+            btnZUp = new Button();
+            btnXLeft = new Button();
+            btnXRight = new Button();
+            btnZDown = new Button();
             zPanel = new Panel();
             lblZ = new Label();
-            btnZUp = new Button();
-            btnZDown = new Button();
+            btnYUp = new Button();
+            btnYDown = new Button();
             capPanel = new Panel();
             lblCap = new Label();
             btnTighten = new Button();
             btnLoosen = new Button();
             btnSetHome = new Button();
-            container.SuspendLayout();
+            shuzukoPanel1 = new ShuzukoPanel();
+            runButton = new Button();
+            testTB = new TextBox();
             xyPanel.SuspendLayout();
             zPanel.SuspendLayout();
             capPanel.SuspendLayout();
+            shuzukoPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // lblStepSize
             // 
             lblStepSize.AutoSize = true;
             lblStepSize.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblStepSize.Location = new Point(722, 48);
+            lblStepSize.Location = new Point(688, 42);
             lblStepSize.Name = "lblStepSize";
             lblStepSize.Size = new Size(122, 32);
             lblStepSize.TabIndex = 0;
@@ -66,32 +68,22 @@
             // 
             cbStepSize.DropDownStyle = ComboBoxStyle.DropDownList;
             cbStepSize.Items.AddRange(new object[] { "1mm", "5mm", "10mm" });
-            cbStepSize.Location = new Point(850, 55);
+            cbStepSize.Location = new Point(815, 49);
             cbStepSize.Name = "cbStepSize";
             cbStepSize.Size = new Size(86, 23);
             cbStepSize.TabIndex = 1;
-            // 
-            // container
-            // 
-            container.BackColor = Color.Transparent;
-            container.Controls.Add(xyPanel);
-            container.Controls.Add(zPanel);
-            container.Controls.Add(capPanel);
-            container.Location = new Point(162, 167);
-            container.Name = "container";
-            container.Size = new Size(1368, 504);
-            container.TabIndex = 2;
+            cbStepSize.SelectedIndexChanged += cbStepSize_SelectedIndexChanged;
             // 
             // xyPanel
             // 
             xyPanel.BackColor = Color.White;
             xyPanel.BorderStyle = BorderStyle.FixedSingle;
             xyPanel.Controls.Add(lblXY);
-            xyPanel.Controls.Add(btnUp);
-            xyPanel.Controls.Add(btnLeft);
-            xyPanel.Controls.Add(btnRight);
-            xyPanel.Controls.Add(btnDown);
-            xyPanel.Location = new Point(3, 3);
+            xyPanel.Controls.Add(btnZUp);
+            xyPanel.Controls.Add(btnXLeft);
+            xyPanel.Controls.Add(btnXRight);
+            xyPanel.Controls.Add(btnZDown);
+            xyPanel.Location = new Point(142, 217);
             xyPanel.Name = "xyPanel";
             xyPanel.Size = new Size(442, 442);
             xyPanel.TabIndex = 0;
@@ -104,68 +96,76 @@
             lblXY.Name = "lblXY";
             lblXY.Size = new Size(138, 32);
             lblXY.TabIndex = 0;
-            lblXY.Text = "XY Control";
+            lblXY.Text = "XZ Control";
             // 
-            // btnUp
+            // btnZUp
             // 
-            btnUp.BackColor = Color.FromArgb(125, 165, 255);
-            btnUp.FlatStyle = FlatStyle.Flat;
-            btnUp.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            btnUp.ForeColor = Color.White;
-            btnUp.Location = new Point(176, 50);
-            btnUp.Name = "btnUp";
-            btnUp.Size = new Size(90, 90);
-            btnUp.TabIndex = 1;
-            btnUp.Text = "↑";
-            btnUp.UseVisualStyleBackColor = false;
+            btnZUp.BackColor = Color.FromArgb(125, 165, 255);
+            btnZUp.FlatStyle = FlatStyle.Flat;
+            btnZUp.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnZUp.ForeColor = Color.White;
+            btnZUp.Location = new Point(176, 50);
+            btnZUp.Name = "btnZUp";
+            btnZUp.Size = new Size(90, 90);
+            btnZUp.TabIndex = 1;
+            btnZUp.Text = "↑";
+            btnZUp.UseVisualStyleBackColor = false;
+            btnZUp.MouseDown += btnZUp_MouseDown;
+            btnZUp.MouseUp += btnZUp_MouseUp;
             // 
-            // btnLeft
+            // btnXLeft
             // 
-            btnLeft.BackColor = Color.FromArgb(125, 165, 255);
-            btnLeft.FlatStyle = FlatStyle.Flat;
-            btnLeft.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            btnLeft.ForeColor = Color.White;
-            btnLeft.Location = new Point(86, 160);
-            btnLeft.Name = "btnLeft";
-            btnLeft.Size = new Size(90, 90);
-            btnLeft.TabIndex = 2;
-            btnLeft.Text = "←";
-            btnLeft.UseVisualStyleBackColor = false;
+            btnXLeft.BackColor = Color.FromArgb(125, 165, 255);
+            btnXLeft.FlatStyle = FlatStyle.Flat;
+            btnXLeft.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnXLeft.ForeColor = Color.White;
+            btnXLeft.Location = new Point(86, 160);
+            btnXLeft.Name = "btnXLeft";
+            btnXLeft.Size = new Size(90, 90);
+            btnXLeft.TabIndex = 2;
+            btnXLeft.Text = "←";
+            btnXLeft.UseVisualStyleBackColor = false;
+            btnXLeft.MouseDown += btnXLeft_MouseDown;
+            btnXLeft.MouseUp += btnXLeft_MouseUp;
             // 
-            // btnRight
+            // btnXRight
             // 
-            btnRight.BackColor = Color.FromArgb(125, 165, 255);
-            btnRight.FlatStyle = FlatStyle.Flat;
-            btnRight.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            btnRight.ForeColor = Color.White;
-            btnRight.Location = new Point(266, 160);
-            btnRight.Name = "btnRight";
-            btnRight.Size = new Size(90, 90);
-            btnRight.TabIndex = 3;
-            btnRight.Text = "→";
-            btnRight.UseVisualStyleBackColor = false;
+            btnXRight.BackColor = Color.FromArgb(125, 165, 255);
+            btnXRight.FlatStyle = FlatStyle.Flat;
+            btnXRight.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnXRight.ForeColor = Color.White;
+            btnXRight.Location = new Point(266, 160);
+            btnXRight.Name = "btnXRight";
+            btnXRight.Size = new Size(90, 90);
+            btnXRight.TabIndex = 3;
+            btnXRight.Text = "→";
+            btnXRight.UseVisualStyleBackColor = false;
+            btnXRight.MouseDown += btnXRight_MouseDown;
+            btnXRight.MouseUp += btnXRight_MouseUp;
             // 
-            // btnDown
+            // btnZDown
             // 
-            btnDown.BackColor = Color.FromArgb(125, 165, 255);
-            btnDown.FlatStyle = FlatStyle.Flat;
-            btnDown.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            btnDown.ForeColor = Color.White;
-            btnDown.Location = new Point(176, 270);
-            btnDown.Name = "btnDown";
-            btnDown.Size = new Size(90, 90);
-            btnDown.TabIndex = 4;
-            btnDown.Text = "↓";
-            btnDown.UseVisualStyleBackColor = false;
+            btnZDown.BackColor = Color.FromArgb(125, 165, 255);
+            btnZDown.FlatStyle = FlatStyle.Flat;
+            btnZDown.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnZDown.ForeColor = Color.White;
+            btnZDown.Location = new Point(176, 270);
+            btnZDown.Name = "btnZDown";
+            btnZDown.Size = new Size(90, 90);
+            btnZDown.TabIndex = 4;
+            btnZDown.Text = "↓";
+            btnZDown.UseVisualStyleBackColor = false;
+            btnZDown.MouseDown += btnZDown_MouseDown;
+            btnZDown.MouseUp += btnZDown_MouseUp;
             // 
             // zPanel
             // 
             zPanel.BackColor = Color.White;
             zPanel.BorderStyle = BorderStyle.FixedSingle;
             zPanel.Controls.Add(lblZ);
-            zPanel.Controls.Add(btnZUp);
-            zPanel.Controls.Add(btnZDown);
-            zPanel.Location = new Point(451, 3);
+            zPanel.Controls.Add(btnYUp);
+            zPanel.Controls.Add(btnYDown);
+            zPanel.Location = new Point(594, 217);
             zPanel.Name = "zPanel";
             zPanel.Size = new Size(442, 442);
             zPanel.TabIndex = 1;
@@ -178,33 +178,37 @@
             lblZ.Name = "lblZ";
             lblZ.Size = new Size(122, 32);
             lblZ.TabIndex = 0;
-            lblZ.Text = "Z Control";
+            lblZ.Text = "Y Control";
             // 
-            // btnZUp
+            // btnYUp
             // 
-            btnZUp.BackColor = Color.FromArgb(125, 165, 255);
-            btnZUp.FlatStyle = FlatStyle.Flat;
-            btnZUp.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            btnZUp.ForeColor = Color.White;
-            btnZUp.Location = new Point(176, 110);
-            btnZUp.Name = "btnZUp";
-            btnZUp.Size = new Size(90, 90);
-            btnZUp.TabIndex = 1;
-            btnZUp.Text = "↑";
-            btnZUp.UseVisualStyleBackColor = false;
+            btnYUp.BackColor = Color.FromArgb(125, 165, 255);
+            btnYUp.FlatStyle = FlatStyle.Flat;
+            btnYUp.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnYUp.ForeColor = Color.White;
+            btnYUp.Location = new Point(176, 110);
+            btnYUp.Name = "btnYUp";
+            btnYUp.Size = new Size(90, 90);
+            btnYUp.TabIndex = 1;
+            btnYUp.Text = "↑";
+            btnYUp.UseVisualStyleBackColor = false;
+            btnYUp.MouseDown += btnYUp_MouseDown;
+            btnYUp.MouseUp += btnYUp_MouseUp;
             // 
-            // btnZDown
+            // btnYDown
             // 
-            btnZDown.BackColor = Color.FromArgb(125, 165, 255);
-            btnZDown.FlatStyle = FlatStyle.Flat;
-            btnZDown.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            btnZDown.ForeColor = Color.White;
-            btnZDown.Location = new Point(176, 220);
-            btnZDown.Name = "btnZDown";
-            btnZDown.Size = new Size(90, 90);
-            btnZDown.TabIndex = 2;
-            btnZDown.Text = "↓";
-            btnZDown.UseVisualStyleBackColor = false;
+            btnYDown.BackColor = Color.FromArgb(125, 165, 255);
+            btnYDown.FlatStyle = FlatStyle.Flat;
+            btnYDown.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            btnYDown.ForeColor = Color.White;
+            btnYDown.Location = new Point(176, 220);
+            btnYDown.Name = "btnYDown";
+            btnYDown.Size = new Size(90, 90);
+            btnYDown.TabIndex = 2;
+            btnYDown.Text = "↓";
+            btnYDown.UseVisualStyleBackColor = false;
+            btnYDown.MouseDown += btnYDown_MouseDown;
+            btnYDown.MouseUp += btnYDown_MouseUp;
             // 
             // capPanel
             // 
@@ -213,7 +217,7 @@
             capPanel.Controls.Add(lblCap);
             capPanel.Controls.Add(btnTighten);
             capPanel.Controls.Add(btnLoosen);
-            capPanel.Location = new Point(899, 3);
+            capPanel.Location = new Point(1046, 217);
             capPanel.Name = "capPanel";
             capPanel.Size = new Size(442, 442);
             capPanel.TabIndex = 2;
@@ -260,12 +264,58 @@
             btnSetHome.FlatStyle = FlatStyle.Flat;
             btnSetHome.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             btnSetHome.ForeColor = Color.White;
-            btnSetHome.Location = new Point(743, 800);
+            btnSetHome.Location = new Point(706, 765);
             btnSetHome.Name = "btnSetHome";
-            btnSetHome.Size = new Size(179, 67);
+            btnSetHome.Size = new Size(178, 67);
             btnSetHome.TabIndex = 3;
-            btnSetHome.Text = "Set Home";
+            btnSetHome.Text = "Home";
             btnSetHome.UseVisualStyleBackColor = false;
+            btnSetHome.Click += btnSetHome_Click;
+            // 
+            // shuzukoPanel1
+            // 
+            shuzukoPanel1.BackColor = Color.White;
+            shuzukoPanel1.BorderColor = Color.Silver;
+            shuzukoPanel1.BorderRadius = 10;
+            shuzukoPanel1.Controls.Add(runButton);
+            shuzukoPanel1.Controls.Add(testTB);
+            shuzukoPanel1.Controls.Add(capPanel);
+            shuzukoPanel1.Controls.Add(zPanel);
+            shuzukoPanel1.Controls.Add(xyPanel);
+            shuzukoPanel1.Controls.Add(lblStepSize);
+            shuzukoPanel1.Controls.Add(cbStepSize);
+            shuzukoPanel1.Controls.Add(btnSetHome);
+            shuzukoPanel1.ForeColor = Color.Black;
+            shuzukoPanel1.GradientAngle = 90F;
+            shuzukoPanel1.GradientBottomColor = Color.White;
+            shuzukoPanel1.GradientTopColor = Color.White;
+            shuzukoPanel1.Location = new Point(15, 15);
+            shuzukoPanel1.Name = "shuzukoPanel1";
+            shuzukoPanel1.Size = new Size(1590, 979);
+            shuzukoPanel1.TabIndex = 4;
+            // 
+            // runButton
+            // 
+            runButton.BackColor = Color.DodgerBlue;
+            runButton.FlatStyle = FlatStyle.Flat;
+            runButton.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            runButton.ForeColor = Color.White;
+            runButton.Location = new Point(142, 800);
+            runButton.Name = "runButton";
+            runButton.Size = new Size(178, 67);
+            runButton.TabIndex = 5;
+            runButton.Text = "Run";
+            runButton.UseVisualStyleBackColor = false;
+            runButton.Click += runButton_Click;
+            // 
+            // testTB
+            // 
+            testTB.BackColor = Color.WhiteSmoke;
+            testTB.Font = new Font("Segoe UI", 20F);
+            testTB.Location = new Point(142, 726);
+            testTB.Name = "testTB";
+            testTB.Size = new Size(235, 43);
+            testTB.TabIndex = 4;
             // 
             // ManualControl
             // 
@@ -273,43 +323,42 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(140, 192, 252);
             ClientSize = new Size(1620, 1009);
-            Controls.Add(lblStepSize);
-            Controls.Add(cbStepSize);
-            Controls.Add(container);
-            Controls.Add(btnSetHome);
+            Controls.Add(shuzukoPanel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ManualControl";
             Text = "ManualMode";
-            container.ResumeLayout(false);
             xyPanel.ResumeLayout(false);
             xyPanel.PerformLayout();
             zPanel.ResumeLayout(false);
             zPanel.PerformLayout();
             capPanel.ResumeLayout(false);
             capPanel.PerformLayout();
+            shuzukoPanel1.ResumeLayout(false);
+            shuzukoPanel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Label lblStepSize;
         private ComboBox cbStepSize;
-        private FlowLayoutPanel container;
         private Panel xyPanel;
         private Label lblXY;
-        private Button btnUp;
-        private Button btnLeft;
-        private Button btnRight;
-        private Button btnDown;
+        private Button btnZUp;
+        private Button btnXLeft;
+        private Button btnXRight;
+        private Button btnZDown;
         private Panel zPanel;
         private Label lblZ;
-        private Button btnZUp;
-        private Button btnZDown;
+        private Button btnYUp;
+        private Button btnYDown;
         private Panel capPanel;
         private Label lblCap;
         private Button btnTighten;
         private Button btnLoosen;
         private Button btnSetHome;
+        private ShuzukoPanel shuzukoPanel1;
+        private TextBox testTB;
+        private Button runButton;
     }
 }

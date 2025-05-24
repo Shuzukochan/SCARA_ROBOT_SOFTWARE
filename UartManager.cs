@@ -1,63 +1,55 @@
-﻿using System;
+﻿using SCARA_ROBOT_SOFTWARE;
 using System.IO.Ports;
 using System.Text;
 
-namespace SCARA_ROBOT_SOFTWARE
+public class UartManager
 {
-    public class UartManager
+    private static readonly UartManager _instance = new();
+    public static UartManager Instance => _instance;
+
+    public SerialPort SerialPort { get; private set; }
+
+    private UartManager()
     {
-        private static readonly UartManager _instance = new();
-        public static UartManager Instance => _instance;
+    }
 
-        public SerialPort SerialPort { get; private set; }
+    public void Open()
+    {
+        if (SerialPort != null && SerialPort.IsOpen)
+            return;
 
-        private UartManager()
+        SerialPort = new SerialPort
         {
-            SerialPort = new SerialPort
-            {
-                PortName = GlobalVariables.selectedPort,
-                BaudRate = GlobalVariables.selectedBaudrate,
-                Parity = Parity.None,
-                DataBits = 8,
-                StopBits = StopBits.One,
-                Handshake = Handshake.None,
-                Encoding = Encoding.ASCII
-            };
-        }
+            PortName = GlobalVariables.selectedPort,
+            BaudRate = GlobalVariables.selectedBaudrate,
+            Parity = Parity.None,
+            DataBits = 8,
+            StopBits = StopBits.One,
+            Handshake = Handshake.None,
+            Encoding = Encoding.ASCII
+        };
 
-        public void Open()
-        {
-            if (!SerialPort.IsOpen)
-            {
-                SerialPort.Open();
-            }
-        }
+        SerialPort.Open();
+    }
 
-        public void Close()
-        {
-            if (SerialPort.IsOpen)
-            {
-                SerialPort.Close();
-            }
-        }
+    public void Close()
+    {
+        if (SerialPort != null && SerialPort.IsOpen)
+            SerialPort.Close();
+    }
 
-        public void SendCommand(string command)
+    public void SendCommand(string command)
+    {
+        if (SerialPort != null && SerialPort.IsOpen && !string.IsNullOrEmpty(command))
         {
-            if (SerialPort.IsOpen && !string.IsNullOrEmpty(command))
-            {
-                SerialPort.Write(command);
-            }
+            SerialPort.Write(command);
         }
-        public string ReceiveResponse()
-        {
-            if (SerialPort.IsOpen)
-            {
-                return SerialPort.ReadExisting();
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
+    }
+
+    public string ReceiveResponse()
+    {
+        return SerialPort != null && SerialPort.IsOpen
+            ? SerialPort.ReadExisting()
+            : string.Empty;
     }
 }

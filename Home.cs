@@ -12,6 +12,19 @@ namespace SCARA_ROBOT_SOFTWARE
             InitializeComponent();
             OpenFormInPanel(new ComPort());
         }
+        public void UpdateConnectionStatus()
+        {
+            if (UartManager.Instance.SerialPort != null && UartManager.Instance.SerialPort.IsOpen)
+            {
+                statusLabel.Text = "Status: Connected";
+                statusPanel.BackColor = System.Drawing.Color.LimeGreen;
+            }
+            else
+            {
+                statusLabel.Text = "Status: Disconnected";
+                statusPanel.BackColor = System.Drawing.Color.Red;
+            }
+        }
 
         public void OpenFormInPanel(Form childForm)
         {
@@ -32,16 +45,45 @@ namespace SCARA_ROBOT_SOFTWARE
 
         private void manualButton_Click(object sender, EventArgs e)
         {
-            OpenFormInPanel(new ManualControl());
+            if (UartManager.Instance.SerialPort == null || !UartManager.Instance.SerialPort.IsOpen)
+            {
+                MessageBox.Show("UART is not connected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                OpenFormInPanel(new ManualControl());
+            }
         }
         private void setupButton_Click(object sender, EventArgs e)
         {
-            OpenFormInPanel(new Setup());
+            if (UartManager.Instance.SerialPort == null || !UartManager.Instance.SerialPort.IsOpen)
+            {
+                MessageBox.Show("UART is not connected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                OpenFormInPanel(new Setup());
+            }
         }
 
         private void comPortButton_Click(object sender, EventArgs e)
         {
             OpenFormInPanel(new ComPort());
+        }
+
+        private void runProgramButton_Click(object sender, EventArgs e)
+        {
+            if (UartManager.Instance.SerialPort == null || !UartManager.Instance.SerialPort.IsOpen)
+            {
+                MessageBox.Show("UART is not connected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                OpenFormInPanel(new RunProgram());
+            }
         }
     }
 }

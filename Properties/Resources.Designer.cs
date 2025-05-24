@@ -63,6 +63,16 @@ namespace SCARA_ROBOT_SOFTWARE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Logo_LABone_png {
+            get {
+                object obj = ResourceManager.GetObject("Logo-LABone-png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap theta1 {
             get {
                 object obj = ResourceManager.GetObject("theta1", resourceCulture);
